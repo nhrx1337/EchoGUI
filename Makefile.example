@@ -1,0 +1,14 @@
+CXX = g++
+CXXFLAGS = -Wall -g -I./include -I./ext/glad/include -I./ext -I/usr/include/freetype2
+LIBS = -lglfw -ldl -lGL -lfreetype
+
+SRCS = main.cpp src/*.cpp ext/glad/src/glad.c
+TARGET = echogui
+
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
+	$(CXX) -o $(TARGET) $(SRCS) $(CXXFLAGS) $(LIBS)
+
+clean:
+	rm -f $(TARGET)
