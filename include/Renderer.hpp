@@ -47,6 +47,7 @@ public:
     void flush();
 
     void drawRect(float x, float y, float w, float h, glm::vec4 color);
+    void drawBorder(float x, float y, float w, float h, float thickness, glm::vec4 color);
     void drawTexture(unsigned int textureID, float x, float y, float w, float h, glm::vec4 tint = glm::vec4(1.0f));
 };
 #endif

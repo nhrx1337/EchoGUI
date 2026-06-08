@@ -112,6 +112,46 @@ void Renderer::drawRect(float x, float y, float w, float h, glm::vec4 color) {
     indexCount += 6;
 }
 
+void Renderer::drawBorder(float x, float y, float w, float h, float thickness, glm::vec4 color) {
+    if (indexCount + 6 >= MAX_INDEX_COUNT) flush();
+
+    float texID = 0.0f; // Uses index 0 (white texture pixel)
+    
+    // Normalize thickness relative to the smallest quad dimension to avoid distortion
+    float minDim = (w < h) ? w : h;
+    float thicknessRatio = thickness / minDim;
+
+    // Pack the thickness ratio into negative alpha to pass data directly to the shader
+    glm::vec4 borderData = glm::vec4(color.r, color.g, color.b, -thicknessRatio);
+
+    // Append quad vertices to the batch buffer
+    bufferPtr->position = { x, y, 0.0f };
+    bufferPtr->color = borderData;
+    bufferPtr->texCoords = { 0.0f, 0.0f };
+    bufferPtr->texID = texID;
+    bufferPtr++;
+
+    bufferPtr->position = { x + w, y, 0.0f };
+    bufferPtr->color = borderData;
+    bufferPtr->texCoords = { 1.0f, 0.0f };
+    bufferPtr->texID = texID;
+    bufferPtr++;
+
+    bufferPtr->position = { x + w, y + h, 0.0f };
+    bufferPtr->color = borderData;
+    bufferPtr->texCoords = { 1.0f, 1.0f };
+    bufferPtr->texID = texID;
+    bufferPtr++;
+
+    bufferPtr->position = { x, y + h, 0.0f };
+    bufferPtr->color = borderData;
+    bufferPtr->texCoords = { 0.0f, 1.0f };
+    bufferPtr->texID = texID;
+    bufferPtr++;
+
+    indexCount += 6;
+}
+
 void Renderer::drawTexture(unsigned int textureID, float x, float y, float w, float h, glm::vec4 tint) {
     // Check if texture is already bound within active texture unit queue
     float slot = -1.0f;
