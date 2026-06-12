@@ -130,6 +130,28 @@ Image logo("assets/images/logo.png", 10.0f, 10.0f, 64.0f, 64.0f);
 logo.draw(renderer);
 ```
 
+### TextField
+- Creates an interactive text input field with dynamic scrolling.
+```cpp
+#include "include/TextField.hpp"
+#include "include/Font.hpp"
+
+// Load font asset first
+Font Arial("assets/fonts/<font>.ttf", 24);
+
+// TextField constructor: Font, X, Y, Width, Height
+TextField txtf(Arial, 10.0f, 10.0f, 200.0f, 40.0f);
+
+// Update logic inside the main loop (handles focus, mouse clicks, and keyboard inputs)
+txtf.update(mouseX, mouseY, gui);
+
+// Renders background, dynamic border, and clipped text area
+txtf.draw(renderer, gui);
+
+// Retrieve the typed text string when needed
+std::string text = txtf.getString();
+```
+
 ### Input Handling
 
 - A global static utility providing simple peripheral polling.

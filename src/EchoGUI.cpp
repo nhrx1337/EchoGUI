@@ -124,7 +124,7 @@ unsigned int EchoGUI::getWindowHeight()  { return scr_height; }
 glm::vec2 EchoGUI::getMousePosition() const {
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
-    glm::vec2 rawMouse(static_cast<float>(xpos), static_cast<float>(ypos));
+    glm::vec2 rawMouse((float)xpos, (float)ypos);
 
     int winWidth, winHeight;
     glfwGetWindowSize(window, &winWidth, &winHeight);

@@ -15,6 +15,8 @@ class Text {
         Text(const Font& fontRef, std::string text, float x, float y, float scale, float r, float g, float b);
 
         float getTextWidth() const;
+        float getTextHeight() const;
+
         void draw(Renderer& renderer);
 };
 

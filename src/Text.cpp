@@ -42,3 +42,22 @@ float Text::getTextWidth() const {
     }
     return width;
 }
+
+float Text::getTextHeight() const {
+    float max_ascent = 0.0f;
+    float max_descent = 0.0f;
+    const auto& fontCharacters = font.getCharacters();
+
+    for (const char& c : text) {
+        auto it = fontCharacters.find(c);
+        if (it != fontCharacters.end()) {
+            const Character& ch = it->second;
+            float ascent = ch.Bearing.y * scale;
+            if (ascent > max_ascent) max_ascent = ascent;
+
+            float descent = (ch.Size.y - ch.Bearing.y) * scale;
+            if (descent > max_descent) max_descent = descent;
+        }
+    }
+    return max_ascent + max_descent;
+}

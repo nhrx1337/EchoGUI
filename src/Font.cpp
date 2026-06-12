@@ -59,7 +59,7 @@ bool Font::load(const std::string& fontPath, unsigned int fontSize) {
             texture,
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            static_cast<unsigned int>(face->glyph->advance.x)
+            (unsigned int)face->glyph->advance.x
         };
         characters.insert(std::pair<char, Character>(c, character));
     }
