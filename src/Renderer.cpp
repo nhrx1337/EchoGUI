@@ -1,6 +1,7 @@
 #include "../include/Renderer.hpp"
+#include "../shaders/embedded_shaders.hpp"
 
-Renderer::Renderer() : quadShader("shaders/shader.vs", "shaders/shader.fs") {
+Renderer::Renderer() : quadShader(VERTEX_SHADER_SOURCE, FRAGMENT_SHADER_SOURCE) {
     // Query maximum concurrent texture slots supported by user's GPU hardware
     glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureSlots);
     
